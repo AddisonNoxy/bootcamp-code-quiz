@@ -1,0 +1,11 @@
+#quiz-field {
+    display: none;
+}
+
+.answer {
+    max-width: 400px;
+}
+
+.answer:hover {
+    background-color: purple;
+}
