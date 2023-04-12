@@ -1,18 +1,29 @@
-//add timer interval
-//add function for local storage of scores
-//add array list of questions and answers
-//add section for possible clickable answers
-//add section for correct or incorrect results
+//allow the user to store score locally
+//retrieve scores from storage
+
+var scoreList = localStorage;
+
+console.log(scoreList);
+
+var displayList = document.createElement("p");
+
+//highScoreListSec.appendChild(displayList);
 
 //assign various HTML elements to variables
 var startButton = document.querySelector("#start-button");
 var quizMain = document.querySelector("#quiz-field");
 var timerDisplay = document.querySelector("#text-timer");
-var highScoreButton = document.querySelector("#highscore-button");
+var highScoreDisplayButton = document.querySelector("#highscore-display-button");
 var questionDisplay = document.querySelector("#question-field");
 var scoreDisplay = document.querySelector("#score-display");
+var highScoreSection = document.querySelector("#high-score-field");
+var highScoreListSec = document.querySelector("#high-score-list");
+var highScoreButton = document.querySelector("#high-score-button");
+var highScoreInput = document.querySelector("#high-score-input");
 
 var allQuestionSlots = document.querySelectorAll("li");
+
+var timer = "";
 
 //var answer1 = allQuestionSlots[0];
 
@@ -45,8 +56,9 @@ function startGame() {
     if (quizPlaying) {
         return;
     } else {
-        quizPlaying = true;        
-        var timer = setInterval(function() {
+        quizPlaying = true;
+        timerLength = 40;        
+        timer = setInterval(function() {
             scoreDisplay.textContent = "SCORE: " + score;
             timerLength--;
             timerDisplay.textContent = "Time: " + timerLength;
@@ -129,7 +141,19 @@ function showHighScores() {
 }
 
 function gameOver() {
-    
+    clearInterval(timer);
+    quizMain.setAttribute("style", "display: none;")
+    highScoreSection.setAttribute("style", "display: inline");
 }
 
 startButton.addEventListener("click", startGame);
+
+highScoreDisplayButton.addEventListener("click", showHighScores);
+
+highScoreButton.addEventListener("click", function() {
+    console.log("Logging high score! It is " + highScoreInput.value + " who scored " + score * timerLength);
+    localStorage.setItem("Score-" + highScoreInput.value, score * timerLength);
+    highScoreSection.setAttribute("style", "display: none");
+    timerDisplay.textContent = "Time: ";
+    alert("Score submitted! Thank you!");
+})

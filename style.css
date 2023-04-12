@@ -2,6 +2,14 @@
     display: none;
 }
 
+#high-score-field {
+    display: none;
+}
+
+#high-score-list {
+    display: none;
+}
+
 .answer {
     max-width: 400px;
 }
@@ -15,12 +23,12 @@ li {
     color: white;
 }
 
-#highscore-button {
+#highscore-display-button {
     display: block;
     max-width: 150px;
 }
 
-#highscore-button:hover {
+#highscore-display-button:hover {
     background-color: lightblue;
     color: white;
     cursor: pointer;
