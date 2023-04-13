@@ -3,9 +3,19 @@
 
 var scoreList = localStorage;
 
-console.log(scoreList);
+var highScoreNames = Object.keys(scoreList);
+var highScoreValues = Object.values(scoreList);
 
-var displayList = document.createElement("p");
+console.log(highScoreNames);
+console.log(highScoreValues);
+
+var highScoreAll = [];
+
+for (var i = 0; i < highScoreNames.length; i++) {
+    highScoreAll[i] = highScoreNames[i] + ": "+ highScoreValues[i];
+}
+
+console.log(highScoreAll);
 
 //highScoreListSec.appendChild(displayList);
 
@@ -34,6 +44,7 @@ var numberOfOptions = 4;
 var score = 0;
 
 var quizPlaying = false;
+var scoresVisible = false;
 
 //create the list of questions
 var questions = ["What does the DOM stand for?",
@@ -137,7 +148,22 @@ function removeListeners(item) {
 }
 
 function showHighScores() {
-    
+    console.log("Showing!");
+    var displayScore = [];
+    if (!scoresVisible) {
+        scoresVisible = true;
+        highScoreListSec.setAttribute("style", "display: inline");
+        for (var i = 0; i <= highScoreAll.length-1; i++) {
+            displayScore[i] = document.createElement("p");
+            displayScore[i].setAttribute("id", "high-score-display");
+            displayScore[i].textContent = highScoreAll[i];
+            highScoreListSec.appendChild(displayScore[i]);
+        }
+    } else {
+        highScoreListSec.setAttribute("style", "display: none");
+        scoresVisible = false;
+        displayScore.remove();
+    }
 }
 
 function gameOver() {
